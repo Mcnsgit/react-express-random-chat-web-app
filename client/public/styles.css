@@ -1,0 +1,17 @@
+#video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+video {
+    width: 300px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+#connectButton {
+    display: block;
+    margin: 20px auto;
+}
