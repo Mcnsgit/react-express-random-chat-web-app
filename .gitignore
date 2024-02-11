@@ -1,0 +1,20 @@
+.env
+node_modules
+
+# Logs
+logs
+
+# Runtime data
+pids
+
+# System Files
+.DS_Store
+Thumbs.db
+```
+
+## License
+
+MIT
+
+## Author
+
