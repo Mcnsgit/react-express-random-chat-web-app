@@ -9,7 +9,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { createServer } = require('http');
 
-
+dotenv.config();
 
 // server.js
 const httpServer = createServer(app);
@@ -22,7 +22,7 @@ require('dotenv').config();
 const server = http.createServer(app);
 const io = new Server(server);
 
-const PORT = process.env.index.PORT || 3001;
+
 
 io.on('connection', (socket) => {
     console.log('A user connected');
@@ -36,23 +36,23 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// server.listen(PORT, () => {
+//     console.log(`Server is running on http://localhost:${PORT}`);
+// });
 
 
 
 // Configure dotenv
-dotenv.config();
-
-socketManager(io);
-
-httpServer.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 
 
-// Path: server/socketLogic.js
+// socketManager(io);
+
+// httpServer.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
+
+
+// // Path: server/socketLogic.js
 module.exports = function socketManager(io) {
     io.on('connection', (socket) => {
         socket.on('joinRoom', ({ roomId, userId }) => {
@@ -80,3 +80,4 @@ module.exports = function socketManager(io) {
 };
 
 // Path: server/db.js
+// path: server/in

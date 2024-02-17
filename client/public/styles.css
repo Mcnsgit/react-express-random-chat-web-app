@@ -1,17 +1,31 @@
-#video-container {
+.video-chat-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-}
-
-video {
-    width: 300px;
-    height: 200px;
-    margin: 10px;
-    border: 1px solid black;
-}
-
-#connectButton {
-    display: block;
-    margin: 20px auto;
-}
+  }
+  
+  .remote-video {
+    width: 90%;
+    max-height: 80vh;
+  }
+  
+  .local-video {
+    width: 20%;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+  
+  .video-controls button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+  }
+  
+  /* Example media query for smaller devices */
+  @media (max-width: 600px) {
+    .local-video {
+      width: 50%;
+    }
+  }
+  

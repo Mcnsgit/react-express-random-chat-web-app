@@ -1,37 +1,43 @@
-// Only need to require these once at the top of your file
+// Load environment variables
+require('dotenv').config();
+
 const http = require('http');
 const express = require('express');
 const { Server } = require('socket.io');
-const dotenv = require('dotenv').config(); // Loads environment variables from .env file once
-const connectDB = require('./server/config/database'); // Correct path to your database configuration
-const socketManager = require('./server/socketLogic'); // Assuming socketLogic.js is correctly set up
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
 
-// Initialize Express
+// Database connection
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
+};
+
+// Initialize Express app
 const app = express();
+app.use(cors());
+app.use(express.json());
 
-// Connect to MongoDB
-connectDB(); 
-// Correcting the path to your modules
-const app = require('./server/app'); // Make sure this path is correct
-const connectDB = require('./server/config/database'); // Assuming this is relative to the current file
-const socketManager = require('./server/index'); 
-const middleware = require('./server/middleware/authmiddleware.js');
-const server = require('./server/index');
 
-// Connect to MongoDB
-connectDB();
 
+// Create HTTP server and configure Socket.IO
 const httpServer = http.createServer(app);
 const io = new Server(httpServer);
-const PORT = process.env.PORT || 3001;
-server.Listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+
+io.on('connection', (socket) => {
+  console.log('A user connected');
+  socket.on('disconnect', () => console.log('User disconnected'));
+  // Additional Socket.IO event handling
 });
 
-
-// Utilize the socketManager for handling Socket.IO logic
-socketManager(io);
-
+// Listen on port from environment variable or default
+const PORT = process.env.PORT || 3001;
 httpServer.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -6,25 +6,41 @@
     <title>Socket.IO Chat Test</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
-</head>
-<body>
-    <input id="messageInput" type="text" placeholder="Type a message...">
-    <button onclick="sendMessage()">Send</button>
-    <ul id="messages"></ul>
-</body>
-</html>
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random video chat</title>
+    <script src="../src/components/videoBoxes.js"></script>
+    <script src="../src/components/buttons.js"></script>
+
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
 </head>
-<body>
+<body class="home-page rlt-member app-started rlt-gender-m rlt-stopped">
+    <header class="rlt-header">
+        <div class="rlt-header__container">
+            <div class="rlt-header__logo">
+                <a href="/" class="rlt-header__logo-link">
+                    <img src="https://www.roulette.chat/assets/images/logo.svg" alt="Roulette.chat" class="rlt-header__logo-img">
+                </a>                     
+                <h1>Socket.IO Chat Test</h1>
+            </div>
+        </div>
+    </header>
+    <h2>Video Chat</h2>
+    <div id="video-container"></div>
+    <button onclick="startVideo()">Start Video</button>
+    <button onclick="stopVideo()">Stop Video</button>
+    <ul id="messages"></ul>
+
     <div id="room-id"></div>
-    <video id="localVideo" autoplay muted></video>
+
+    <video id="localVideo" autoplay></video>
+    <video id="screenVideo" autoplay></video>
+
+    <script src="chat.js"></script>
+
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/peerjs@1.3.1/dist/peerjs.min.js"></script>
+
+
+    
+
     <video id="remoteVideo" autoplay></video>
     <button type:"button" id="connectButton">Start</button>
     <script src="./socket.io/socket.io.js"></script>
@@ -32,4 +48,4 @@
     <script src="./script.js"></script>
     
 </body>
-</html> -->
+</html> 

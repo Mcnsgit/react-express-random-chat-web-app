@@ -11,6 +11,7 @@ router.get('/protected', verifyToken, (req, res) => {
 });
 dotenv.config( { path: './.env' } );
 
+
 module.exports = router;
 
 
@@ -20,18 +21,58 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse JSON bodies
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../client/public')));
+// Load environment variables
+require('dotenv').config();
 
-// Routes
-app.get('/api/hello', (req, res) => {
-  res.json({ message: "Hello from the server!" });
-});
+const http = require('http');
+const express = require('express');
+const { Server } = require('socket.io');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
 
-// Catch-all handler for any other request that doesn't match.
+// Database connection
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
+};
+
+
+
+// Serve static files from React app
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// Define routes
+app.use('/api/auth', require('./routes/authRoutes')); // Adjust the path as necessary
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
+
+// Connect to database
+connectDB();
+
+// Create HTTP server and configure Socket.IO
+// const httpServer = http.createServer(app);
+// const io = new Server(httpServer);
+
+// io.on('connection', (socket) => {
+//   console.log('A user connected');
+//   socket.on('disconnect', () => console.log('User disconnected'));
+//   // Additional Socket.IO event handling
+// });
+
+// Listen on port from environment variable or default
+// const PORT = process.env.PORT || 3001;
+// httpServer.listen(PORT, () => {
+//   console.log(`Server is running on http://localhost:${PORT}`);
+// });
+
+
 
 // Routes
 const authRoutes = require('./routes/authRoutes');

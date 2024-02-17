@@ -1,3 +1,36 @@
+const io = require('socket.io');
+
+const socketLogic = (server);{
+    const io = socketIo(server);
+    
+    io.on(connection'// module.exports = function socketManager(io) {
+//     io.on('connection', (socket) => {
+//         socket.on('joinRoom', ({ roomId, userId }) => {
+//             socket.join(roomId);
+//             io.to(roomId).emit('userJoined', { userId, roomId });
+//         });
+
+//         socket.on('sendMessage', (message) => {
+//             io.to(message.roomId).emit('newMessage', message);
+//         });
+
+//         socket.on('disconnect', () => {
+//             if (socket.roomId !== undefined) {
+//                 socket.leave(socket.roomId);
+//                 io.to(socket.roomId).emit('userLeft', socket.id);
+//             } else {
+//                 for (const roomId of Object.keys(socket.rooms)) {
+//                     socket.leave(roomId);
+//                 }
+//             }
+
+//             io.emit('userDisconnected', socket.id);
+//         });
+//     });
+// };
+
+// // Path: server/db.js
+// // 
 module.exports = function socketManager(io) {
     io.on('connection', (socket) => {
         socket.on('joinRoom', ({ roomId, userId }) => {
