@@ -15,6 +15,18 @@ Thumbs.db
 ## License
 
 MIT
+node_modules
+/node_modules/
+
+# Logs
+logs
+
+# Runtime data
+pids
+
+# System Files
+.DS_Store
+Thumbs.db
 
 ## Author
 
