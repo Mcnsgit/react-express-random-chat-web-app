@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import VideoContext from "../contexts/VideoContext.js";
+import { useVideoChat  } from '../contexts/VideoContext.js';
 import "./Video.css";
 import {  Modal, Button, Input, notification, Avatar } from "antd";
 import VideoIcon from "../assets/video.svg";
@@ -16,6 +16,7 @@ const { SocketLogic } = require('../../server/socketLogic.js');
 const { Search } = Input;
 
 const VideoChat = () => {
+  const { VideoContext } = useVideoChat();
   const {
     call,
     callAccepted,

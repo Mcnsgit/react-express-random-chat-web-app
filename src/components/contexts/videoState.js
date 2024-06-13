@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 // import "./chat.css";
-import VideoContext from "./VideoContext.js";
+import { VideoChatProvider } from '../contexts/VideoChatProvider.js';
 import { io } from "socket.io-client";
 import Peer from "simple-peer";
 import { message } from "antd";
@@ -260,7 +260,7 @@ const VideoState = ({ children }) => {
     setChat([...chat, msg]);
   };
   return (
-    <VideoContext.Provider
+    <VideoChatProvider.Provider
       value={{
         call,
         callAccepted,
@@ -313,7 +313,7 @@ const VideoState = ({ children }) => {
       }}
     >
       {children}
-    </VideoContext.Provider>
+    </VideoChatProvider.Provider>
   );
 };
 

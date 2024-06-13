@@ -3,7 +3,7 @@ import { Input, Button, Tooltip, Modal, message } from "antd";
 import Phone from "../assets/phone.gif";
 import Teams from "../assets/teams.mp3";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import VideoContext from "../contexts/VideoContext.js";
+// import VideoChatProvider from "../contexts/VideoContext.import { VideoContext } from '../contexts/VideoContext.js';";
 import svgicon from "../assets/hang-black.svg";
 import './options.css';
 
@@ -44,7 +44,7 @@ const Options = () => {
     otherUser,
     setOtherUser,
     leaveCall1,
-  } = useContext(VideoContext);
+  } = useContext();
 
 useEffect(() => {
   if (userVideo.current.srcObject !== stream) {
